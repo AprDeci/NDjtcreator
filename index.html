@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>荷兰农带请假条生成器</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.12/index.css" />
+    <link rel="stylesheet" href="./index.css"/>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.12/index.full.js"></script>
+    <script src="http://www.bootcdn.cn/html2canvas/"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="app" style="width: 1000px;height: 100%;">
+        <p id="title">农带请假条生成器</p>
+        <div id="backcontainer" style="width: 400px;">
+            <img src="./背景.png" style="width: 400px;">
+            <img id="touxiang" :src='touxiang'>
+            <p class="info" id="jwbh">No.{{jwbh}}</p>
+            <p class="info" id="starttime">{{starttime}}</p>
+            <p class="info" id="name">{{name}}</p>
+            <p class="info" id="class">{{youclass}}</p>
+            <p class="info" id="schoolid">{{shcoolid}}</p>
+            <p class="info" id="phonenumber">{{phonenumber}}</p>
+            <p class="info" id="starttime2">{{starttime2}}</p>
+            <p class="info" id="endtime">{{endtime}}</p>
+            <p class="info" id="timelong">{{timelong}}</p>
+            <p class="info" id="type">{{type}}</p>
+            <p class="info" id="reason">{{reason}}</p>
+            <p class="infotop" id="starttimetop">{{starttime2}}</p>
+            <p class="infotop" id="endtimetop">{{endtime}}</p>
+        </div>
+
+        <div id="textinput" style="width: 400px;">
+            <div class="in"><span>假务编号:</span> <el-input v-model="jwbh" size="large" style="width: 150px;"></el-input>
+            </div>
+            <div class="in"><span>提交(开始)时间</span> <el-date-picker v-model="starttime" v-model="starttime2" size="large"
+                    type="datetime" placeholder="Pick a Date" format="YYYY/MM/DD HH:mm:ss"
+                    value-format="YYYY-MM-DD HH:mm"></el-date-picker></div>
+            <div class="in"><span>结束时间</span> <el-date-picker v-model="endtime" size="large" type="datetime"
+                    placeholder="Pick a Date" format="YYYY/MM/DD HH:mm:ss"
+                    value-format="YYYY-MM-DD HH:mm"></el-date-picker></div>
+            <div class="in"><span>QQ(用于获取头像):</span><el-input v-model="QQ" size="large"
+                    style="width: 150px;"></el-input></div>
+            <div class="in"><span>姓名:</span> <el-input v-model="name" size="large" style="width: 150px;"></el-input>
+            </div>
+            <div class="in"><span>专业班级:</span> <el-input v-model="youclass" size="large"
+                    style="width: 150px;"></el-input></div>
+            <div class="in"><span>学号:</span> <el-input v-model="shcoolid" size="large" style="width: 150px;"></el-input>
+            </div>
+            <div class="in"><span>电话号码:</span> <el-input v-model="phonenumber" size="large"
+                    style="width: 150px;"></el-input></div>
+            <div class="in"><span>类型:</span> <el-input v-model="type" size="large" style="width: 150px;"></el-input>
+            </div>
+            <div class="in"><span>缘由:</span> <el-input v-model="reason" size="large" style="width: 150px;"></el-input>
+            </div>
+            <el-button type="primary" @click="getPic">点击生成</el-button>
+        </div>
+        <a href="https://github.com/q1263868407"><img style="width: 30px; vertical-align:middle;" src="./github.png" alt="github"></a>项目主页
+        <a href="https://www.aprdec.top"><img style="width: 30px;vertical-align:middle;" src="./blog.png" alt="博客"></a>我的博客
+        <p>学习作品,仅限交流</p>
+    </div>
+</body>
+<script src="./index.js"></script>
+</html>

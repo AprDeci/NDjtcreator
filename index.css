@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+#app {
+    position: relative;
+}
+#title{
+    color: red;
+    font-size: 40px;
+    padding-left: 20px;
+}
+.info {
+    font-family: '黑体';
+    font-size: 16px;
+    position: absolute;
+    right: 41px
+}
+
+#backcontainer {
+    position: relative;
+}
+
+#textinput {
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    position: absolute;
+    right: 0px;
+    top: 8%;
+}
+
+.in {
+    margin-bottom: 30px;
+}
+
+#jwbh {
+    top: 217px;
+}
+
+#starttime {
+    top: 247px;
+}
+
+#name {
+    top: 277px;
+}
+
+#class {
+    top: 307px;
+}
+
+#schoolid {
+    top: 341px;
+}
+
+#phonenumber {
+    top: 371px;
+}
+
+#starttime2 {
+    top: 403px;
+}
+
+#endtime {
+    top: 434px;
+}
+
+#timelong {
+    top: 466px;
+}
+
+#type {
+    top: 498px;
+}
+
+#reason {
+    top: 530px;
+}
+
+.infotop {
+    position: absolute;
+    font-size: 14px;
+    left: 87px;
+}
+
+#starttimetop {
+    top: 132px;
+}
+
+#endtimetop {
+    top: 162px
+}
+
+#touxiang {
+    border-radius: 50%;
+    position: absolute;
+    width: 30px;
+    right: 40px;
+    top: 45px;
+}
+@media (max-width: 768px) { 
+    #textinput {
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+    position: absolute;
+    left: 10px;
+    top: 100%;
+}
+    }
