@@ -11,13 +11,15 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.12/index.full.js"></script>
     <script src="http://www.bootcdn.cn/html2canvas/"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.esm.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.js"></script>
 </head>
 <body>
     <div id="app" style="width: 1000px;height: 100%;">
         <p id="title">农带请假条生成器</p>
         <div id="backcontainer" style="width: 400px;">
-            <img src="./背景.png" style="width: 400px;">
-            <img id="touxiang" :src='touxiang'>
+            <img src="./img/背景.png" style="width: 400px;">
+            <img  id="touxiang" :src='touxiang'>
             <p class="info" id="jwbh">No.{{jwbh}}</p>
             <p class="info" id="starttime">{{starttime}}</p>
             <p class="info" id="name">{{name}}</p>
@@ -56,10 +58,10 @@
             </div>
             <div class="in"><span>缘由:</span> <el-input v-model="reason" size="large" style="width: 150px;"></el-input>
             </div>
-            <el-button type="primary" @click="getPic">点击生成</el-button>
+            <el-button type="primary" @click="getCard">点击生成</el-button>
         </div>
-        <a href="https://github.com/q1263868407"><img style="width: 30px; vertical-align:middle;" src="./github.png" alt="github"></a>项目主页
-        <a href="https://www.aprdec.top"><img style="width: 30px;vertical-align:middle;" src="./blog.png" alt="博客"></a>我的博客
+        <a href="https://github.com/q1263868407"><img style="width: 30px; vertical-align:middle;" src="./img/github.png" alt="github"></a>项目主页
+        <a href="https://www.aprdec.top"><img style="width: 30px;vertical-align:middle;" src="./img/blog.png" alt="博客"></a>我的博客
         <p>学习作品,仅限交流</p>
     </div>
 </body>

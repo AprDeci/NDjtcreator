@@ -1,3 +1,4 @@
+
 const app = {
     data() {
         return {
@@ -26,82 +27,90 @@ const app = {
         },
         touxiang: function () {
             return 'http://q1.qlogo.cn/g?b=qq&nk=' + this.QQ + '&s=100'
+            
+            
         }
     },
     methods: {
+
+// 第一个参数是图片的URL地址，第二个是转换成base64地址后要赋值给的img标签
+getBase64Image (url) {
+    var image = new Image()
+    image.src = url + '?v=' + Math.random() // 处理缓存
+    image.crossOrigin = '*' // 支持跨域图片
+    image.onload = () => {
+        var base64 = drawBase64Image(image)
+        return base64
+    }
+},
+drawBase64Image (img) {
+    var canvas = document.createElement('canvas')
+    canvas.width = img.width
+    canvas.height = img.height
+    var ctx = canvas.getContext('2d')
+    ctx.drawImage(img, 0, 0, img.width, img.height)
+    var dataURL = canvas.toDataURL('image/png')
+    return dataURL
+},
         getCard() {
-            html2canvas($("#app"), {
-                allowTaint: true,
-                useCORS: true,
-                canvas: canvas,
-                onrendered: function (canvas) {
-                    dataURL = canvas.toDataURL("image/png");
-                    var img = new Image();
-                    img.src = dataURL;
-                    img.className = 'cardImg';
-                    img.onload = function () {
-                        $(".card").append(img);
-                    }
-                },
-                width: c_width,
-                height: c_height
-            })
-        },
-        getPic() {
-            var c_width = $('#app').outerWidth();//如果box设置了padding，需要获取outerWidth和outerHeight来赋给canvas；
-            var c_height = $('#app').outerHeight();
-
-            var canvas = document.createElement("canvas");
-            var context = canvas.getContext("2d");
-
-            //以下代码是获取根据屏幕分辨率，来设置canvas的宽高以获得高清图片
-            // 屏幕的设备像素比
-            var devicePixelRatio = window.devicePixelRatio || 2;
-
-            // 浏览器在渲染canvas之前存储画布信息的像素比
-            var backingStoreRatio = context.webkitBackingStorePixelRatio ||
-                context.mozBackingStorePixelRatio ||
-                context.msBackingStorePixelRatio ||
-                context.oBackingStorePixelRatio ||
-                context.backingStorePixelRatio || 1;
-
-            // canvas的实际渲染倍率
-            var ratio = devicePixelRatio / backingStoreRatio;
-
-            canvas.width = c_width * ratio;
-            canvas.height = c_height * ratio;
-            canvas.style.width = c_width + "px";
-            canvas.style.height = c_height + "px";
-
-            var transTop = $(document).scrollTop() - $('.card_box').offset().top;//获取div垂直方向的位置
-
-            context.scale(ratio, ratio);
-            context.translate((c_width - $(window).width()) / 2, transTop) //canvas的位置要保证与div位置相同。
-
-            //高清图设置完成
-
-            //解决跨域，将跨域图片路径转为base64格式
-            var img = new Image();
-            var canvas2 = document.createElement('canvas');
-            var ctx = canvas2.getContext('2d');
-            img.crossOrigin = 'Anonymous';
-            img.src = $('#touxiang').attr('src');
-            img.onload = function () {
-                canvas2.height = img.height;
-                canvas2.width = img.width;
-                ctx.drawImage(img, 0, 0);
-                var dataURL = canvas2.toDataURL('image/png');
-                $('#touxiang').attr('src', dataURL);
-                canvas2 = null;
-
-                //重新给img赋值成功后，执行截图方法
-                getCard()
-
+            var getBase64Image=function(url) {
+                var image = new Image()
+                image.src = url + '&v=' + Math.random() // 处理缓存
+                image.crossOrigin = '*' // 支持跨域图片
+                image.onload = function () {
+                    $(".invit_info_qrcode").attr("src",drawBase64Image(image))
+                    convertDivToImage("my_div")
+                }
             }
-        },
-        test(){
-            console.log("111111111111")
-        }
+            
+            var getPixelRatio = function(context) {     // 获取设备的PixelRatio
+                var backingStore = context.backingStorePixelRatio ||
+                    context.webkitBackingStorePixelRatio ||
+                    context.mozBackingStorePixelRatio ||
+                    context.msBackingStorePixelRatio ||
+                    context.oBackingStorePixelRatio ||
+                    context.backingStorePixelRatio || 1;
+                return (window.devicePixelRatio || 1) / backingStore;
+            };
+            var shareContent = document.getElementById("backcontainer"); 
+            var width = shareContent.offsetWidth; 
+            var height = shareContent.offsetHeight; 
+            var qq = document.getElementById("touxiang")
+            qq.onload=()=>{
+                setTimeout(500)
+            }
+            var canvas = document.createElement("canvas"); 
+            var context = canvas.getContext('2d'); 
+            var scale = getPixelRatio(context);    //将canvas的容器扩大PixelRatio倍，再将画布缩放，将图像放大PixelRatio倍。
+            canvas.width = width * scale*scale; 
+            canvas.height = height * scale*scale;
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+            context.scale(scale, scale);
+     
+            var opts = {
+                /* scale: scale,  */
+                canvas: canvas,
+                useCORS: true,
+                width: width, 
+                height: height,
+                dpi: window.devicePixelRatio
+            };
+            setTimeout(100)
+            html2canvas(shareContent, opts).then(function (canvas) {
+                context.mozImageSmoothingEnabled = false;
+                context.webkitImageSmoothingEnabled = false;
+                context.msImageSmoothingEnabled = false;
+                context.imageSmoothingEnabled = false;
+                var dataUrl = canvas.toDataURL('image/png', 1.0)
+                let eleLink = document.createElement('a')
+                eleLink.download = 'jt.png'
+                eleLink.href = dataUrl
+                eleLink.click()
+                eleLink.remove()
+              });
+          }
+
     }
 }
 Vue.createApp(app).use(ElementPlus).mount('#app')
