@@ -3,12 +3,11 @@ const app = {
     data() {
         return {
             jwbh: '92970',
-            starttime: '2023-09-21 06:34',
+            starttime: '2023-09-26 18:34',
             name: '吴亦凡',
             youclass: '2021级软件ry0班',
             shcoolid: '2110111111',
             phonenumber: '13673054011',
-            starttime2: '2023-09-21 06:34',
             endtime: '2023-09-22 18:00',
             type: '病假',
             reason: '发烧',
@@ -24,6 +23,9 @@ const app = {
             let leave1 = staytimeGap % (3600 * 1000);
             let stayMin = Math.floor(leave1 / (60 * 1000));  // 分钟
             return year + '天' + hour + "小时" + stayMin + '分钟';
+        },
+        starttime2: function () {
+            return this.starttime
         },
         touxiang: function () {
             return 'http://q1.qlogo.cn/g?b=qq&nk=' + this.QQ + '&s=100'
