@@ -4,17 +4,29 @@ const app = {
         return {
             jwbh: '92970',
             starttime: '2023-09-26 18:34',
-            name: '吴亦凡',
-            youclass: '2021级软件ry0班',
-            shcoolid: '2110111111',
-            phonenumber: '13673054011',
+            name: '孟夏',
+            youclass: '2021级软件rj3班',
+            shcoolid: '211012208',
+            phonenumber: '13673054019',
             endtime: '2023-09-22 18:00',
             type: '病假',
             reason: '发烧',
             QQ: '1263868407'
         }
     },
+    mounted() {
+        this.endtime=this.timeend
+        this.starttime=this.timestart
+    },
     computed: {
+        timeend: function () {
+            let time  = new Date();
+            return time.getFullYear()+'-'+(time.getMonth()+1)+'-'+time.getDate()+' '+'20:00';
+        },
+        timestart:function () {
+            let time  = new Date();
+            return time.getFullYear()+'-'+(time.getMonth()+1)+'-'+(time.getDate()-1)+' '+time.getHours()+':'+time.getMinutes();
+          },
         timelong: function () {
             let staytimeGap = new Date(this.endtime).getTime() - new Date(this.starttime).getTime();
             let stayHour = Math.floor(staytimeGap / (3600 * 1000));  // 小时
@@ -24,13 +36,12 @@ const app = {
             let stayMin = Math.floor(leave1 / (60 * 1000));  // 分钟
             return year + '天' + hour + "小时" + stayMin + '分钟';
         },
-        starttime2: function () {
-            return this.starttime
-        },
+         starttime2: function () {
+            let time  = new Date();
+            return time.getFullYear()+'-'+(time.getMonth()+1)+'-'+(time.getDate()-1)+' '+(time.getHours()+1)+':00';
+        }, 
         touxiang: function () {
             return 'http://q1.qlogo.cn/g?b=qq&nk=' + this.QQ + '&s=100'
-            
-            
         }
     },
     methods: {
