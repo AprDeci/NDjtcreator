@@ -25,7 +25,7 @@ const app = {
         },
         timestart:function () {
             let time  = new Date();
-            return time.getFullYear()+'-'+(time.getMonth()+1)+'-'+(time.getDate()-1)+' '+time.getHours()+':'+time.getMinutes();
+            return time.getFullYear()+'-'+(time.getMonth()+1)+'-'+(time.getDate()-1)+' '+time.getHours()+':'+(time.getMinutes()<10?'0':'') + time.getMinutes();
           },
         timelong: function () {
             let staytimeGap = new Date(this.endtime).getTime() - new Date(this.starttime).getTime();
