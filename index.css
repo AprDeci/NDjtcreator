@@ -105,6 +105,7 @@ body {
     right: 40px;
     top: 45px;
 }
+
 @media (max-width: 768px) { 
     #textinput {
     display: flex;

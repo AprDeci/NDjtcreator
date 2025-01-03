@@ -49,7 +49,45 @@ const app = {
         },  
     },
     methods: {
-
+        saveData() {
+            let dataCopy = { ...this.$data };
+            delete dataCopy.starttime;
+            delete dataCopy.endtime;
+            delete dataCopy.starttime2;
+    
+            let dataStr = JSON.stringify(dataCopy);
+            let downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", `data:application/json;charset=utf-8,${encodeURIComponent(dataStr)}`);
+            downloadAnchorNode.setAttribute("download", 'data.json');
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        },
+        importData() {
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = _this => {
+                let files = _this.target.files;
+                if (files.length === 0) {
+                    return;
+                }
+                let reader = new FileReader();
+                reader.onload = e => {
+                    let data = JSON.parse(e.target.result);
+                    this.jwbh = data.jwbh;
+                    this.name = data.name;
+                    this.youclass = data.youclass;
+                    this.shcoolid = data.shcoolid;
+                    this.phonenumber = data.phonenumber;
+                    this.type = data.type;
+                    this.reason = data.reason;
+                    this.QQ = data.QQ;
+                };
+                reader.readAsText(files[0]);
+            };
+            input.click();
+        }
 
 }
 }
